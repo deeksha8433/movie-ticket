@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinemaHub - Book Your Tickets</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- ===== Header ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-film"></i>CinemaHub
+                </div>
+                <nav class="nav">
+                    <a href="#movies" class="nav-link active">Movies</a>
+                    <a href="#booking" class="nav-link">Book Tickets</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+                <div class="user-actions">
+                    <button class="btn btn-outline" onclick="window.location.href='login.html'">Login</button>
+                    <button class="btn btn-primary" onclick="window.location.href='signup.html'">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== Hero Section ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to CinemaHub</h1>
+            <p>Book your favorite movies instantly and enjoy the best cinema experience</p>
+            <button class="btn btn-accent btn-lg">
+                <i class="fas fa-ticket-alt"></i> Book Now
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== Movies Section ===== -->
+    <section class="movies-section" id="movies">
+        <div class="container">
+            <div class="section-header">
+                <h2>
+                    <i class="fas fa-star"></i> Featured Movies
+                </h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All</button>
+                    <button class="filter-tab" data-filter="action">Action</button>
+                    <button class="filter-tab" data-filter="drama">Drama</button>
+                    <button class="filter-tab" data-filter="comedy">Comedy</button>
+                    <button class="filter-tab" data-filter="horror">Horror</button>
+                </div>
+            </div>
+            <div class="movies-grid" id="moviesGrid">
+                <!-- Movies will be rendered here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Booking Section ===== -->
+    <section class="booking-section" id="booking">
+        <div class="container">
+            <div class="booking-wrapper">
+                <!-- Movie Details Card -->
+                <div class="movie-details-card">
+                    <div class="movie-poster">
+                        <div id="selectedMoviePoster" class="placeholder-poster">
+                            <i class="fas fa-film"></i>
+                            <span>Select a Movie</span>
+                        </div>
+                    </div>
+                    <div class="movie-info">
+                        <h3 id="selectedMovieTitle">Select a Movie</h3>
+                        <p id="selectedMovieGenre">Genre: -</p>
+                        <p id="selectedMovieDuration">Duration: -</p>
+                        <p id="selectedMovieRating">Rating: -</p>
+                    </div>
+                </div>
+
+                <!-- Theater Selection -->
+                <div class="theater-selection">
+                    <h3>
+                        <i class="fas fa-calendar-alt"></i> Theater & Time
+                    </h3>
+
+                    <div class="date-selector">
+                        <label for="showDate">Select Date</label>
+                        <input type="date" id="showDate" required>
+                    </div>
+
+                    <div>
+                        <h4 style="margin-bottom: 15px; color: var(--text-muted); font-size: 0.9rem;">Select Time</h4>
+                        <div class="time-slots">
+                            <button class="time-slot" data-time="10:00 AM" disabled>10:00 AM</button>
+                            <button class="time-slot" data-time="1:30 PM" disabled>1:30 PM</button>
+                            <button class="time-slot" data-time="4:45 PM" disabled>4:45 PM</button>
+                            <button class="time-slot" data-time="7:15 PM" disabled>7:15 PM</button>
+                            <button class="time-slot" data-time="10:00 PM" disabled>10:00 PM</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seat Map -->
+                <div class="seat-map-container">
+                    <div class="screen">
+                        <span>SCREEN</span>
+                        <div class="screen-line"></div>
+                    </div>
+
+                    <div class="seat-legend">
+                        <div class="legend-item">
+                            <div class="seat available" style="width: 20px; height: 20px; cursor: default;"></div>
+                            <span>Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat selected" style="width: 20px; height: 20px; cursor: default;"></div>
+                            <span>Selected</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat occupied" style="width: 20px; height: 20px; cursor: default;"></div>
+                            <span>Occupied</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat vip" style="width: 20px; height: 20px; cursor: default;"></div>
+                            <span>VIP (₹350)</span>
+                        </div>
+                    </div>
+
+                    <div class="seats-container" id="seatsContainer">
+                        <!-- Seats will be generated here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Booking Summary -->
+                <div class="booking-summary">
+                    <h3>
+                        <i class="fas fa-receipt"></i> Booking Summary
+                    </h3>
+
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Movie:</span>
+                            <span id="summaryMovie">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Date:</span>
+                            <span id="summaryDate">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Time:</span>
+                            <span id="summaryTime">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Seats:</span>
+                            <span id="summarySeats">-</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="summaryTotal">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-block btn-lg" id="bookTicketsBtn" disabled>
+                        <i class="fas fa-check-circle"></i> Confirm Booking
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Features Section ===== -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose CinemaHub?</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Booking</h3>
+                    <p>Book your tickets in seconds with our user-friendly interface</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure Payments</h3>
+                    <p>Safe and encrypted payment gateway for your transactions</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Best Movies</h3>
+                    <p>Access the latest blockbuster movies and upcoming releases</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Premium Experience</h3>
+                    <p>Enjoy VIP seats with premium comfort and service</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Book tickets anytime, anywhere from your mobile device</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Our dedicated support team is always here to help you</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>
+                        <i class="fas fa-film"></i> About CinemaHub
+                    </h4>
+                    <p>Your ultimate destination for booking movie tickets online with ease and convenience.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>
+                        <i class="fas fa-link"></i> Quick Links
+                    </h4>
+                    <ul>
+                        <li><a href="#movies">Movies</a></li>
+                        <li><a href="#booking">Book Tickets</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>
+                        <i class="fas fa-info-circle"></i> Information
+                    </h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>
+                        <i class="fas fa-envelope"></i> Newsletter
+                    </h4>
+                    <p>Subscribe to get updates on new movies and special offers</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CinemaHub. All rights reserved. | Crafted with <i class="fas fa-heart"></i> for movie lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== Success Modal ===== -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Booking Confirmed!</h3>
+            <p>Your tickets have been successfully booked</p>
+
+            <div class="booking-details" id="bookingDetails">
+                <!-- Booking details will be inserted here by JavaScript -->
+            </div>
+
+            <button class="btn btn-primary btn-block" onclick="closeModal()">
+                <i class="fas fa-home"></i> Back to Home
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
