@@ -1,16 +1,15 @@
-# Job Portal App
+# 🎬 Movie Ticket Booking App
 
-A full-stack web app where users can apply for jobs.
+An online movie ticket booking web app.
 
 ## 🔗 Live Demo
-https://your-project.vercel.app
-
+https://movie-ticket-three-xi.vercel.app/
 ## 💻 Tech Stack
 - React
 - Node.js
-- MongoDB
+- Express
 
 ## ✨ Features
-- Login/signup
-- Apply for jobs
-- Admin dashboard
+- Browse movies
+- Book tickets
+- User login/signup
